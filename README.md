@@ -23,9 +23,9 @@ func main() {
 	conn, _ := redis.Dial("tcp", "0.0.0.0:6379")
 	defer conn.Close()
 
-	rg := Graph{}.New("social", conn)
+	rg := redisgraph.Graph{}.New("social", conn)
 
-	john := Node{
+	john := redisgraph.Node{
 		Label: "person",
 		Properties: map[string]interface{}{
 			"name":   "John Doe",
@@ -36,7 +36,7 @@ func main() {
 	}
 	rg.AddNode(&john)
 
-	japan := Node{
+	japan := redisgraph.Node{
 		Label: "country",
 		Properties: map[string]interface{}{
 			"name": "Japan",
@@ -44,7 +44,7 @@ func main() {
 	}
 	rg.AddNode(&japan)
 
-	edge := Edge{
+	edge := redisgraph.Edge{
 		Source:      &john,
 		Relation:    "visited",
 		Destination: &japan,
